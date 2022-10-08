@@ -1,12 +1,13 @@
 // 1. Функция sum принимает
-    //...здесь пишем код.
-    // В return стоит "заглушка", чтоб typescript не ругался параметром целые положительные
+//...здесь пишем код.
+// В return стоит "заглушка", чтоб typescript не ругался параметром целые положительные
 // числа (неопределённое кол-во) и возвращает их сумму (rest).
 
-    export function sum(...nums: Array<number>): number {
-         console.log(nums)
+export function sum(...nums: Array<number>): number {
+    console.log(nums)
     return [...nums].reduce((prev, curr) => prev + curr)
 }
+
 sum(3, 5, 7, 6, 4, 9)
 
 
@@ -18,13 +19,13 @@ sum(3, 5, 7, 6, 4, 9)
 //  - "11", если треугольник обычный,
 //  - "00", если такого треугольника не существует.
 
-export function getTriangleType(a: number,b: number,c: number): string {
+export function getTriangleType(a: number, b: number, c: number): string {
     //...здесь пишем код.
     // В return стоит "заглушка", чтоб typescript не ругался
 
-    if(!((a + b > c) && (a + c > b) && (b + c > a))) return "00"
-    else if(a === b && b === c && a === c) return "10"
-    else if(a === b || b === c || a === c) return "01"
+    if (!((a + b > c) && (a + c > b) && (b + c > a))) return "00"
+    else if (a === b && b === c && a === c) return "10"
+    else if (a === b || b === c || a === c) return "01"
     else return "11"
 }
 
@@ -32,7 +33,7 @@ export function getTriangleType(a: number,b: number,c: number): string {
 // 3. Функция getSum принимает параметром целое число и возвращает
 // сумму цифр этого числа
 
-export function getSum(number: number): number{
+export function getSum(number: number): number {
     //...здесь пишем код.
     // В return стоит "заглушка", чтоб typescript не ругался
     let result = 0
@@ -66,9 +67,9 @@ export function getSquarePositiveIntegers(array: Array<number>): Array<number> {
     //...здесь пишем код.
     // В return стоит "заглушка", чтоб typescript не ругался
     let newArr = []
-    for(let i = 0; i < array.length; i++){
-        if(array[i] > 0 && Number.isInteger(array[i])){
-            newArr.push(Math.pow(array[i],2))
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] > 0 && Number.isInteger(array[i])) {
+            newArr.push(Math.pow(array[i], 2))
         }
     }
     return newArr
@@ -77,9 +78,11 @@ export function getSquarePositiveIntegers(array: Array<number>): Array<number> {
 // 6. Функция принимает параметром целое не отрицательное число N и возвращает сумму всех чисел от 0 до N включительно
 // Попробуйте реализовать функцию без использования перебирающих методов.
 
-export const sumFirstNumbers = (N:number):number => {
-    if(N === 1) return 1
-    else return N + sumFirstNumbers(N-1)
+export const sumFirstNumbers = (N: number): number => {
+    console.log(N)
+    if (N < 0) return 0
+    else if (N === 1) return 1
+    else return N + sumFirstNumbers(N - 1)
 }
 
 // ...и "лапку" вверх!!!!
@@ -93,8 +96,19 @@ export const sumFirstNumbers = (N:number):number => {
 // Считаем, что количество банкнот каждого номинала не ограничено
 
 
-export function getBanknoteList(amountOfMoney: number): Array<number> {
+export function getBanknoteList(amountOfMoney: number): number[] {
     //...здесь пишем код.
     // В return стоит "заглушка", чтоб typescript не ругался
-    return [1]
+    const banknotes = [1000, 500, 100, 50, 20, 10, 5, 2, 1]
+    let sum = 0
+    let index = 0
+    const banknoteList:Array<number> = []
+    while (sum < amountOfMoney) {
+        if (amountOfMoney - (sum + banknotes[index]) >= 0) {
+            banknoteList.push(banknotes[index])
+            sum += banknotes[index]
+        }else index ++
+    }
+
+    return banknoteList
 }
